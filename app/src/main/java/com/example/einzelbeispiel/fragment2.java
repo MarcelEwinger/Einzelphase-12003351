@@ -44,7 +44,6 @@ public class fragment2 extends Fragment {
 
             }
         });
-
         return view;
     }
 
@@ -55,8 +54,8 @@ public class fragment2 extends Fragment {
     }
 
     private void init(View view){
-        button = view.findViewById(R.id.btnMod);
-        editMatrikelnummer = view.findViewById(R.id.editTextNumberFragment2);
+        button = view.findViewById(R.id.btnCalculate);
+        editMatrikelnummer = view.findViewById(R.id.inputMatrikelnummerFragment2);
         textView = view.findViewById(R.id.textViewCalculated);
     }
 
@@ -72,9 +71,6 @@ public class fragment2 extends Fragment {
                 stringBuilder.append(string.charAt(i));
             }
         }
-        //Toast.makeText(getActivity(), stringBuilder.toString(), Toast.LENGTH_LONG).show();
         textView.setText(stringBuilder.toString());
-
-
     }
 }

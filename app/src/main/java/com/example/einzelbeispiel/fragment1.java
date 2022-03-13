@@ -57,14 +57,11 @@ public class fragment1 extends Fragment {
                     textView.setText("Falsche Matrikelnummer");
                 }else{
                     onRunSchedulerButtonClicked(matrikelnummer);
-
                 }
             }
         });
-
         return view;
     }
-
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -79,7 +76,7 @@ public class fragment1 extends Fragment {
     }
 
     private void init(View view){
-        editText = view.findViewById(R.id.editTextNumber);
+        editText = view.findViewById(R.id.inputMatrikelnummerFragment1);
         button = view.findViewById(R.id.buttonSendToServer);
         textView = view.findViewById(R.id.txtShowAnswer);
     }

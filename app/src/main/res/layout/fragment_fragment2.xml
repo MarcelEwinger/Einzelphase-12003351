@@ -25,7 +25,7 @@
             app:layout_constraintVertical_bias="0.08" />
 
         <EditText
-            android:id="@+id/editTextNumberFragment2"
+            android:id="@+id/inputMatrikelnummerFragment2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:ems="10"
@@ -47,19 +47,20 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/editTextNumberFragment2"
+            app:layout_constraintTop_toBottomOf="@+id/inputMatrikelnummerFragment2"
+            android:textSize="32dp"
             app:layout_constraintVertical_bias="0.105" />
 
         <Button
-            android:id="@+id/btnMod"
-            android:layout_width="150dp"
-            android:layout_height="73dp"
+            android:id="@+id/btnCalculate"
+            android:layout_width="208dp"
+            android:layout_height="70dp"
             android:text="Berechnen"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintHorizontal_bias="0.497"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textViewCalculated"
-            app:layout_constraintVertical_bias="0.741" />
+            app:layout_constraintVertical_bias="0.77" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>
