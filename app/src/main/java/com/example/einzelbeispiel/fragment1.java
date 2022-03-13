@@ -16,6 +16,7 @@ import android.widget.Toast;
 
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.Socket;
 
@@ -103,13 +104,21 @@ public class fragment1 extends Fragment {
 
     Observable<String> networkObservable(String matrikelnummer){
         return Observable.defer(() -> {
+            try {
            socket = new Socket(server, port);
            dataOutputStream = new DataOutputStream(socket.getOutputStream());
            dataOutputStream.writeBytes(matrikelnummer  + "\n");
            dataOutputStream.flush();
            bufferedReader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
            String newLine = bufferedReader.readLine();
+
+           socket.close();
+           dataOutputStream.close();
+           bufferedReader.close();
             return Observable.just(newLine);
+            } catch (IOException e) {
+                return Observable.just(e.getMessage());
+            }
         });
     }
 }
