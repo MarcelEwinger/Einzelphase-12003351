@@ -26,7 +26,7 @@ public class MainActivity extends AppCompatActivity {
 
         VPAdapter vpAdpater = new VPAdapter(getSupportFragmentManager(), FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
         vpAdpater.addFragment(new fragment1(), "Socket");
-        vpAdpater.addFragment(new fragment1(), "Berechnung");
+        vpAdpater.addFragment(new fragment2(), "Berechnung");
         viewPager.setAdapter(vpAdpater);
 
     }
