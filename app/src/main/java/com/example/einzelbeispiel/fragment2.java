@@ -33,8 +33,8 @@ public class fragment2 extends Fragment {
             @Override
             public void onClick(View v) {
                 //Toast.makeText(getActivity(), "Second Fragment", Toast.LENGTH_LONG).show();
-                String matrikelnummer = editMatrikelnummer.getText().toString();
-                if(matrikelnummer.length() != 8){
+                String matrikelnummer = editMatrikelnummer.getText().toString();//get Input from EditText
+                if(matrikelnummer.length() != 8){//check if Matrikelnummer is valid
                     Toast.makeText(getActivity(), "Falsche Matrikelnummer", Toast.LENGTH_LONG).show();
                     textView.setText("Falsche Matrikelnummer");
                 }else{
@@ -53,24 +53,40 @@ public class fragment2 extends Fragment {
 
     }
 
+    /**
+     * Initialize button, editMatrikelnummer and textView
+     * @param view
+     */
     private void init(View view){
         button = view.findViewById(R.id.btnCalculate);
         editMatrikelnummer = view.findViewById(R.id.inputMatrikelnummerFragment2);
         textView = view.findViewById(R.id.textViewCalculated);
     }
 
+    /**
+     * Every second number is switch with ASCII chars
+     * @param string
+     */
     private void calc(String string){
-        StringBuilder stringBuilder = new StringBuilder();
+        StringBuilder stringBuilder = new StringBuilder();//new StringBuilder
 
-        for(int i = 0; i < string.length(); i++){
-            if(i % 2 != 0){
+        for(int i = 0; i < string.length(); i++){//loop through String
+            if(i % 2 != 0){//every second number
+                /*
+                int to Char --> Typecasting
+                string.chatAt(i)--> char at position i
+                String.valueOf --> convert different Types into string
+                Integer.parseInt --> convert string into Integer
+                Why 96 because the Alphabet (lowerCase) starts with 96
+                * */
+
                 int temp = Integer.parseInt(String.valueOf(string.charAt(i))) + 96;
-                char temp2 = (char)temp;
-                stringBuilder.append(temp2);
+                char temp2 = (char)temp;//parse int into char
+                stringBuilder.append(temp2);//apendString
             }else{
-                stringBuilder.append(string.charAt(i));
+                stringBuilder.append(string.charAt(i));//apendString
             }
         }
-        textView.setText(stringBuilder.toString());
+        textView.setText(stringBuilder.toString());//set text (stringbuilder) into textView
     }
 }

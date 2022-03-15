@@ -10,8 +10,8 @@ import java.util.ArrayList;
 
 public class VPAdapter  extends FragmentPagerAdapter {
 
-    private final ArrayList<Fragment> fragmentArrayList = new ArrayList<>();
-    private final ArrayList<String> fragmentTitle = new ArrayList<>();
+    private ArrayList<Fragment> fragmentArrayList = new ArrayList<>();
+    private  ArrayList<String> fragmentTitle = new ArrayList<>();
 
     public VPAdapter(@NonNull FragmentManager fm, int behavior) {
         super(fm, behavior);

@@ -23,6 +23,8 @@ public class MainActivity extends AppCompatActivity {
         viewPager = findViewById(R.id.viewPager);
 
         tabLayout.setupWithViewPager(viewPager);
+        /*This method will link the given ViewPager and this TabLayout
+        together so that changes in one are automatically reflected in the other.*/
 
         VPAdapter vpAdpater = new VPAdapter(getSupportFragmentManager(), FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
         vpAdpater.addFragment(new fragment1(), "Socket");

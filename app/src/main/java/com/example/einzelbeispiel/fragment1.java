@@ -42,6 +42,11 @@ public class fragment1 extends Fragment {
     private static final String TAG = "RxAndroidSamples";
 
     private final CompositeDisposable disposables = new CompositeDisposable();
+    /*
+    Disposable is used to dispose the subscription when an
+     Observer no longer wants to listen to Observable. In android
+     disposable are very useful in avoiding memory leaks.
+    * */
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -73,7 +78,7 @@ public class fragment1 extends Fragment {
     @Override
     public void onDestroy() {
         super.onDestroy();
-        disposables.clear();
+        disposables.clear();//unsubscribe the Observer
     }
 
     private void init(View view){
@@ -81,36 +86,66 @@ public class fragment1 extends Fragment {
         button = view.findViewById(R.id.buttonSendToServer);
         textView = view.findViewById(R.id.txtShowAnswer);
     }
+
+    /**
+     * Create an Observer that listen to the Observable
+     * @param matrikelnummer
+     */
     void onRunSchedulerButtonClicked(String matrikelnummer) {
         disposables.add(networkObservable(matrikelnummer)
-                // Run on a background thread
+                // This tell the Observable to run the task on a background thread.
                 .subscribeOn(Schedulers.io())
                 // Be notified on the main thread
                 .observeOn(AndroidSchedulers.mainThread())
+
                 .subscribeWith(new DisposableObserver<String>() {
+                    /**
+                     * When an Observable completes the emission of all the items, onComplete() will be called.
+                     */
                     @Override public void onComplete() {
                         Log.d(TAG, "onComplete()");
                     }
 
+                    /**
+                     * In case of any error, onError() method will be called.
+                     * @param e
+                     */
                     @Override public void onError(Throwable e) {
                         Log.e(TAG, "onError()", e);
                     }
 
+                    /**
+                     * This method will be called when Observable starts emitting the data.
+                     * @param string
+                     */
                     @Override public void onNext(String string) {
                         textView.setText(string);
                     }
                 }));
     }
 
+    /**
+     * Create an Observable
+     * @param matrikelnummer
+     * @return new Observable
+     */
     Observable<String> networkObservable(String matrikelnummer){
         return Observable.defer(() -> {
             try {
-           socket = new Socket(server, port);
+           socket = new Socket(server, port);//open new Socket (Communicationendpoint)
            dataOutputStream = new DataOutputStream(socket.getOutputStream());
+           //A data output stream lets an application write primitive Java data types to an output stream in a portable way
            dataOutputStream.writeBytes(matrikelnummer  + "\n");
+           //Writes out the string to the underlying output stream as a sequence of bytes.
            dataOutputStream.flush();
+           //Flushes this data output stream. This forces any buffered output bytes to be written out to the stream.
            bufferedReader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+           //Reads text from a character-input stream,
            String newLine = bufferedReader.readLine();
+           /*
+           Reads a line of text. A line is considered to be
+           terminated by any one of a line feed ('\n')
+           */
 
            socket.close();
            dataOutputStream.close();
